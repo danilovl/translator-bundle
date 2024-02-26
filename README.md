@@ -167,7 +167,7 @@ php bin/console danilovl:translator:migration-to-database git-diff --mode=dump
 php bin/console danilovl:translator:migration-to-database git-diff --locale=en
 ```
 
-Generate `update`,`delete`,`insert` sql queries by comparing the current file with the database.
+Generate `update`, `delete`, `insert` sql queries by comparing the current file with the database.
 
 ```shell
 php bin/console danilovl:translator:migration-to-database database-diff
