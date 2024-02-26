@@ -1,0 +1,5 @@
+INSERT INTO `translator` (`locale`, `key`, `value`, `domain`, `created_at`) VALUES
+{% for key, value in translations %}
+('{{ locale }}', '{{ key }}', '{{ value|raw }}', '{{ domain }}', NOW()){% if loop.last %};{% else %},{% endif %}
+
+{% endfor %}

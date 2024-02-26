@@ -1,0 +1,48 @@
+{
+    "name": "danilovl/translator-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony bundle provides simple management of system translations.",
+    "keywords": ["php","symfony","bundle"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir Danilov"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Danilovl\\TranslatorBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Danilovl\\TranslatorBundle\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.3",
+        "doctrine/orm": "^2.18",
+        "doctrine/doctrine-bundle": "^2.11",
+        "easycorp/easyadmin-bundle": "^4.9",
+        "symfony/console": "^7.0",
+        "symfony/event-dispatcher": "^7.0",
+        "symfony/framework-bundle": "^7.0",
+        "symfony/http-kernel": "^7.0",
+        "symfony/translation": "^7.0",
+        "symfony/yaml": "^7.0",
+        "twig/twig": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.2"
+    },
+    "scripts": {
+        "phpstan": "phpstan analyse -c phpstan.neon src tests --no-progress",
+        "phpstan-generate-baseline": "vendor/bin/phpstan analyse --configuration phpstan.neon  src/ tests/ --generate-baseline",
+        "tests": "vendor/bin/phpunit tests"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    }
+}

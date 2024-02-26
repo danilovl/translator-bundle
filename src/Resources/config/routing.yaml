@@ -1,0 +1,3 @@
+danilovl_translator_admin_dashboard:
+  path: /translator/admin
+  controller: Danilovl\TranslatorBundle\Admin\DashboardController::index

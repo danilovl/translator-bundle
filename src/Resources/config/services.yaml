@@ -1,0 +1,25 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Danilovl\TranslatorBundle\:
+    resource: '../../../src'
+    exclude:
+      - '../../../src/DependencyInjection'
+      - '../../../src/Entity'
+      - '../../../src/Helper'
+      - '../../../src/Resources'
+
+  Danilovl\TranslatorBundle\Command\GenerateTranslationCommand:
+    calls:
+      - setLogger: ['@?logger']
+
+  Danilovl\TranslatorBundle\Command\MigrationToDatabaseCommand:
+    calls:
+      - setLogger: ['@?logger']
+
+  Danilovl\TranslatorBundle\Command\MigrationFromDatabaseCommand:
+    calls:
+      - setLogger: ['@?logger']

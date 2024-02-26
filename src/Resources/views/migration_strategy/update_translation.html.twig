@@ -1,0 +1,3 @@
+{% for key, value in translations %}
+UPDATE `translator` SET `value` = '{{ value|raw }}' WHERE `locale` = '{{ locale }}' AND `key` = '{{ key }}';
+{% endfor %}

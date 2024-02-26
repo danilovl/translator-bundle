@@ -1,0 +1,3 @@
+{% for key, value in translations %}
+DELETE FROM `translator` WHERE `locale` = '{{ locale }}' AND `key` = '{{ key }}';
+{% endfor %}

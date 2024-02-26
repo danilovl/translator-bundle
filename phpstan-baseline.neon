@@ -1,0 +1,46 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Class Danilovl\\\\TranslatorBundle\\\\Command\\\\GenerateTranslationCommand has an uninitialized readonly property \\$io\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Command/GenerateTranslationCommand.php
+
+		-
+			message: "#^Readonly property Danilovl\\\\TranslatorBundle\\\\Command\\\\GenerateTranslationCommand\\:\\:\\$io is assigned outside of the constructor\\.$#"
+			count: 1
+			path: src/Command/GenerateTranslationCommand.php
+
+		-
+			message: "#^Class Danilovl\\\\TranslatorBundle\\\\Command\\\\MigrationFromDatabaseCommand has an uninitialized readonly property \\$io\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Command/MigrationFromDatabaseCommand.php
+
+		-
+			message: "#^Readonly property Danilovl\\\\TranslatorBundle\\\\Command\\\\MigrationFromDatabaseCommand\\:\\:\\$io is assigned outside of the constructor\\.$#"
+			count: 1
+			path: src/Command/MigrationFromDatabaseCommand.php
+
+		-
+			message: "#^Class Danilovl\\\\TranslatorBundle\\\\Command\\\\MigrationToDatabaseCommand has an uninitialized readonly property \\$io\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Command/MigrationToDatabaseCommand.php
+
+		-
+			message: "#^Readonly property Danilovl\\\\TranslatorBundle\\\\Command\\\\MigrationToDatabaseCommand\\:\\:\\$io is assigned outside of the constructor\\.$#"
+			count: 1
+			path: src/Command/MigrationToDatabaseCommand.php
+
+		-
+			message: "#^Class Danilovl\\\\TranslatorBundle\\\\Command\\\\TransformToFormatCommand has an uninitialized readonly property \\$io\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Command/TransformToFormatCommand.php
+
+		-
+			message: "#^Readonly property Danilovl\\\\TranslatorBundle\\\\Command\\\\TransformToFormatCommand\\:\\:\\$io is assigned outside of the constructor\\.$#"
+			count: 1
+			path: src/Command/TransformToFormatCommand.php
+
+		-
+			message: "#^Offset string on array\\{\\} in isset\\(\\) does not exist\\.$#"
+			count: 1
+			path: src/Helper/ArrayHelper.php
