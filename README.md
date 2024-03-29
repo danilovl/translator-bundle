@@ -31,7 +31,7 @@ Symfony bundle provides a simple way to manage system translations.
 Install `danilovl/translator-bundle` package by Composer:
 
 ``` bash
-$ composer require danilovl/translator-bundle
+composer require danilovl/translator-bundle
 ```
 Add the `TranslatorBundle` to your application's bundles if it does not add automatically:
 
