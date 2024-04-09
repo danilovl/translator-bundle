@@ -2,7 +2,11 @@
 
 namespace Danilovl\TranslatorBundle\MigrationStrategy\FromDatabase;
 
-use Danilovl\TranslatorBundle\Helper\YamlHelper;
+use Danilovl\TranslatorBundle\Constant\OrderConstant;
+use Danilovl\TranslatorBundle\Helper\{
+    YamlHelper,
+    ArrayHelper
+};
 use Danilovl\TranslatorBundle\Repository\TranslatorRepository;
 use Danilovl\TranslatorBundle\Util\TranslatorConfigurationUtil;
 use Doctrine\ORM\EntityManagerInterface;
@@ -64,7 +68,7 @@ abstract class BaseMigration
             $this->entityManager->clear();
         }
 
-        return $result;
+        return ArrayHelper::sort($result, OrderConstant::ASCENDING);
     }
 
     protected function dumpToFile(array $translations, string $locale, string $domain): void

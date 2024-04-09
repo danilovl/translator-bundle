@@ -231,6 +231,48 @@ app:
 php bin/console danilovl:translator:transform-to-format messages.en.yaml dotNested
 ```
 
+#### 3.5 Change translation file order
+
+Order `ASC`.
+
+```yaml
+app.text.common.B: B
+app.text.common.A: A
+app.text.common.C: C
+```
+
+```shell
+php bin/console danilovl:translator:transform-to-format messages.en.yaml flatten ASC
+```
+
+Result:
+
+```yaml
+app.text.common.A: A
+app.text.common.B: B
+app.text.common.C: C
+```
+
+Order `DESC`.
+
+```yaml
+app.text.common.B: B
+app.text.common.A: A
+app.text.common.C: C
+```
+
+```shell
+php bin/console danilovl:translator:transform-to-format messages.en.yaml flatten DESC
+```
+
+Result:
+
+```yaml
+app.text.common.C: C
+app.text.common.B: B
+app.text.common.A: A
+```
+
 ## License
 
 The TranslatorBundle is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

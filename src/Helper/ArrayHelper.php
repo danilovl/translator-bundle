@@ -3,6 +3,7 @@
 namespace Danilovl\TranslatorBundle\Helper;
 
 use Danilovl\TranslatorBundle\Constant\DiffConstant;
+use Danilovl\TranslatorBundle\Constant\OrderConstant;
 
 class ArrayHelper
 {
@@ -68,5 +69,24 @@ class ArrayHelper
         foreach ($translations as $key => $translation) {
             $translations[$key] = preg_replace("~'~", "\\'", $translation);
         }
+    }
+
+    /**
+     * @param array<array<string>> $translations
+     */
+    public static function sort(array $translations, OrderConstant $order): array
+    {
+        switch ($order) {
+            case OrderConstant::ASCENDING:
+                ksort($translations);
+
+                break;
+            case OrderConstant::DESCENDING:
+                krsort($translations);
+
+                break;
+        }
+
+        return $translations;
     }
 }

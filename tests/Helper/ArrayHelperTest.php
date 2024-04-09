@@ -2,6 +2,7 @@
 
 namespace Danilovl\TranslatorBundle\Tests\Helper;
 
+use Danilovl\TranslatorBundle\Constant\OrderConstant;
 use Danilovl\TranslatorBundle\Helper\ArrayHelper;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -14,7 +15,7 @@ class ArrayHelperTest extends TestCase
     {
         $result = ArrayHelper::flattenArray($data);
 
-        $this->assertEquals($expected, $result);
+        $this->assertSame($expected, $result);
     }
 
     #[DataProvider('dataDotToNested')]
@@ -22,7 +23,7 @@ class ArrayHelperTest extends TestCase
     {
         $result = ArrayHelper::dotToNested($data);
 
-        $this->assertEquals($expected, $result);
+        $this->assertSame($expected, $result);
     }
 
     #[DataProvider('dataAddEscape')]
@@ -30,7 +31,7 @@ class ArrayHelperTest extends TestCase
     {
         ArrayHelper::addEscape($data);
 
-        $this->assertEquals($expected, $data);
+        $this->assertSame($expected, $data);
     }
 
     #[DataProvider('dataGetDiff')]
@@ -38,7 +39,15 @@ class ArrayHelperTest extends TestCase
     {
         $result = ArrayHelper::getDiff($currentArray, $previousArray);
 
-        $this->assertEquals($expected, $result);
+        $this->assertSame($expected, $result);
+    }
+
+    #[DataProvider('dataOrder')]
+    public function testOrder(array $currentArray, OrderConstant $order, array $expected): void
+    {
+        $result = ArrayHelper::sort($currentArray, $order);
+
+        $this->assertSame($expected, $result);
     }
 
     public static function dataFlattenArray(): Generator
@@ -82,11 +91,11 @@ class ArrayHelperTest extends TestCase
         yield [
             [
                 'key1' => "It's a test",
-                'key2' => "She said, 'Hello'",
+                'key2' => "She said, 'Hello'"
             ],
             [
                 'key1' => "It\\'s a test",
-                'key2' => "She said, \\'Hello\\'",
+                'key2' => "She said, \\'Hello\\'"
             ],
         ];
     }
@@ -96,13 +105,28 @@ class ArrayHelperTest extends TestCase
         yield [
             ['a' => 1, 'b' => 2, 'c' => 3],
             ['a' => 1, 'b' => 5, 'd' => 4],
-            ['insert' => ['c' => 3], 'delete' => ['d' => 4], 'update' => ['b' => 2]],
+            ['update' => ['b' => 2], 'delete' => ['d' => 4], 'insert' => ['c' => 3]]
         ];
 
         yield [
             ['a' => 1, 'b' => 2, 'c' => 3],
             ['a' => 1, 'b' => 2, 'c' => 3],
-            ['insert' => [], 'delete' => [], 'update' => []],
+            ['update' => [], 'delete' => [], 'insert' => []]
+        ];
+    }
+
+    public static function dataOrder(): Generator
+    {
+        yield [
+            ['b' => 2, 'c' => 3, 'a' => 1],
+            OrderConstant::ASCENDING,
+            ['a' => 1, 'b' => 2, 'c' => 3]
+        ];
+
+        yield [
+            ['a' => 1, 'b' => 2, 'c' => 3],
+            OrderConstant::DESCENDING,
+            ['c' => 3, 'b' => 2, 'a' => 1]
         ];
     }
 }

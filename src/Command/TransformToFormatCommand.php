@@ -2,9 +2,14 @@
 
 namespace Danilovl\TranslatorBundle\Command;
 
-use Danilovl\TranslatorBundle\Helper\ArrayHelper;
-use Danilovl\TranslatorBundle\Constant\YamlFormatConstant;
-use Danilovl\TranslatorBundle\Helper\YamlHelper;
+use Danilovl\TranslatorBundle\Constant\{
+    OrderConstant,
+    YamlFormatConstant
+};
+use Danilovl\TranslatorBundle\Helper\{
+    YamlHelper,
+    ArrayHelper
+};
 use Danilovl\TranslatorBundle\Util\TranslatorConfigurationUtil;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -41,6 +46,12 @@ class TransformToFormatCommand extends Command
                 InputArgument::REQUIRED,
                 'Format mode.',
                 suggestedValues: YamlFormatConstant::values()
+            )
+            ->addArgument(
+                'order',
+                InputArgument::OPTIONAL,
+                'Order mode.',
+                suggestedValues: OrderConstant::values()
             );
     }
 
@@ -56,6 +67,10 @@ class TransformToFormatCommand extends Command
         /** @var string $mode */
         $mode = $input->getArgument('mode');
         $mode = YamlFormatConstant::from($mode);
+
+        /** @var string|null $order */
+        $order = $input->getArgument('order');
+        $order = $order ?OrderConstant::from($order) : null;
 
         $isExist = false;
         if (file_exists($file)) {
@@ -77,6 +92,10 @@ class TransformToFormatCommand extends Command
 
         /** @var array $translations */
         $translations = Yaml::parseFile($file);
+
+        if ($order) {
+            $translations = ArrayHelper::sort(ArrayHelper::flattenArray($translations), $order);
+        }
 
         $result = match ($mode) {
             YamlFormatConstant::FLATTEN => ArrayHelper::flattenArray($translations),
