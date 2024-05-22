@@ -22,6 +22,17 @@ readonly class DatabaseLoader implements LoaderInterface
         $offset = 0;
         $limit = 500;
 
+        // Run console command or start Kernel application.
+        // Cache is empty and table not exists. DatabaseLoader try load translations automatically.
+        $isTableExist = $this->entityManager
+            ->getConnection()
+            ->createSchemaManager()
+            ->tablesExist(['translator']);
+
+        if (!$isTableExist) {
+            return $messageCatalogue;
+        }
+
         while (true) {
             $translations = $this->translatorRepository->getByDomainLocale($locale, $domain, $offset, $limit);
             if (empty($translations)) {
