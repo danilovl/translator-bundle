@@ -5,9 +5,11 @@ namespace Danilovl\TranslatorBundle\EventSubscriber;
 use Danilovl\TranslatorBundle\Entity\Translator;
 use Danilovl\TranslatorBundle\Service\TranslationCacheService;
 use Danilovl\TranslatorBundle\Util\TranslatorConfigurationUtil;
-use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityDeletedEvent;
-use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityPersistedEvent;
-use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\{
+    AfterEntityDeletedEvent,
+    AfterEntityUpdatedEvent,
+    AfterEntityPersistedEvent
+};
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AdminSubscriber implements EventSubscriberInterface
@@ -32,8 +34,11 @@ class AdminSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /** @var Translator $entity */
         $entity = $event->getEntityInstance();
+        if (!$entity instanceof Translator) {
+            return;
+        }
+
         $this->refreshCache($entity);
     }
 
@@ -43,8 +48,11 @@ class AdminSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /** @var Translator $entity */
         $entity = $event->getEntityInstance();
+        if (!$entity instanceof Translator) {
+            return;
+        }
+
         $this->refreshCache($entity);
     }
 
@@ -54,8 +62,11 @@ class AdminSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /** @var Translator $entity */
         $entity = $event->getEntityInstance();
+        if (!$entity instanceof Translator) {
+            return;
+        }
+
         $this->refreshCache($entity);
     }
 
