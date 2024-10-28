@@ -70,7 +70,7 @@ class TransformToFormatCommand extends Command
 
         /** @var string|null $order */
         $order = $input->getArgument('order');
-        $order = $order ?OrderConstant::from($order) : null;
+        $order = $order ? OrderConstant::from($order) : null;
 
         $isExist = false;
         if (file_exists($file)) {
@@ -102,7 +102,7 @@ class TransformToFormatCommand extends Command
             YamlFormatConstant::DOT_NESTED => ArrayHelper::dotToNested($translations),
         };
 
-        (new Filesystem())->dumpFile($file, YamlHelper::defaultDump($result));
+        (new Filesystem)->dumpFile($file, YamlHelper::defaultDump($result));
 
         $this->io->success('Done');
 

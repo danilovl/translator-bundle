@@ -76,7 +76,7 @@ abstract class BaseMigration
         $fileName = $this->translatorConfigurationUtil
             ->getTranslationFileName($locale, $domain);
 
-        (new Filesystem())->dumpFile($fileName, YamlHelper::defaultDump($translations));
+        (new Filesystem)->dumpFile($fileName, YamlHelper::defaultDump($translations));
     }
 
     protected function getFileName(string $locale, string $domain): string

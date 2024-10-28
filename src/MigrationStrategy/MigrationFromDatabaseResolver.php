@@ -2,8 +2,10 @@
 
 namespace Danilovl\TranslatorBundle\MigrationStrategy;
 
-use Danilovl\TranslatorBundle\Constant\YamlFormatConstant;
-use Danilovl\TranslatorBundle\Constant\MigrationModeConstant;
+use Danilovl\TranslatorBundle\Constant\{
+    YamlFormatConstant,
+    MigrationModeConstant
+};
 use Danilovl\TranslatorBundle\MigrationStrategy\FromDatabase\{
     FlattenMigration,
     DotNestedMigration

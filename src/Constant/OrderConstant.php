@@ -4,7 +4,7 @@ namespace Danilovl\TranslatorBundle\Constant;
 
 enum OrderConstant: string
 {
-    case ASCENDING  = 'ASC';
+    case ASCENDING = 'ASC';
     case DESCENDING = 'DESC';
 
     public static function values(): array

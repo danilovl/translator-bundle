@@ -19,7 +19,7 @@ class TranslatorExtension extends Extension
 
         $kernelCacheDir = $parameterBag->get('kernel.cache_dir');
         $kernelProjectDir = $parameterBag->get('kernel.project_dir');
-        $translatorDefaultPath  = $parameterBag->get('translator.default_path');
+        $translatorDefaultPath = $parameterBag->get('translator.default_path');
 
         $configuration = new Configuration;
         $config = $this->processConfiguration($configuration, $configs);

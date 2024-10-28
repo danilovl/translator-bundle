@@ -2,8 +2,10 @@
 
 namespace Danilovl\TranslatorBundle\MigrationStrategy\ToDatabase;
 
-use Danilovl\TranslatorBundle\Helper\ArrayHelper;
-use Danilovl\TranslatorBundle\Helper\TranslationHelper;
+use Danilovl\TranslatorBundle\Helper\{
+    ArrayHelper,
+    TranslationHelper
+};
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\{
     Finder,

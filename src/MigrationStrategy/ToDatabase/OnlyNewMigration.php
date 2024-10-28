@@ -31,5 +31,4 @@ class OnlyNewMigration extends BaseMigration
             $domain
         );
     }
-
 }

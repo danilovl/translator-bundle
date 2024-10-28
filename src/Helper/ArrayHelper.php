@@ -2,8 +2,10 @@
 
 namespace Danilovl\TranslatorBundle\Helper;
 
-use Danilovl\TranslatorBundle\Constant\DiffConstant;
-use Danilovl\TranslatorBundle\Constant\OrderConstant;
+use Danilovl\TranslatorBundle\Constant\{
+    DiffConstant,
+    OrderConstant
+};
 
 class ArrayHelper
 {

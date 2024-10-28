@@ -21,7 +21,7 @@ class TranslationCacheService
     public function clear(string $locale, string $cacheDir): void
     {
         $filesToRemove = $this->getFilesToRemove($locale, $cacheDir);
-        (new Filesystem())->remove($filesToRemove);
+        (new Filesystem)->remove($filesToRemove);
     }
 
     /**
@@ -35,7 +35,7 @@ class TranslationCacheService
 
         $name = sprintf('catalogue.%s.*', $locale);
 
-        $finder = new Finder();
+        $finder = new Finder;
         $finder->files()
             ->name($name)
             ->in($cacheDir);
