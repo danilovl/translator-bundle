@@ -21,7 +21,7 @@
     },
     "require": {
         "php": "^8.3",
-        "doctrine/orm": "^2.18",
+        "doctrine/orm": "^2 || ^3",
         "doctrine/doctrine-bundle": "^2.11",
         "easycorp/easyadmin-bundle": "^4.9",
         "symfony/console": "^7.0",
