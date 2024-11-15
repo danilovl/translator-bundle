@@ -1,46 +1,19 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Class Danilovl\\\\TranslatorBundle\\\\Command\\\\GenerateTranslationCommand has an uninitialized readonly property \\$io\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: src/Command/GenerateTranslationCommand.php
-
-		-
-			message: "#^Readonly property Danilovl\\\\TranslatorBundle\\\\Command\\\\GenerateTranslationCommand\\:\\:\\$io is assigned outside of the constructor\\.$#"
-			count: 1
-			path: src/Command/GenerateTranslationCommand.php
-
-		-
-			message: "#^Class Danilovl\\\\TranslatorBundle\\\\Command\\\\MigrationFromDatabaseCommand has an uninitialized readonly property \\$io\\. Assign it in the constructor\\.$#"
-			count: 1
-			path: src/Command/MigrationFromDatabaseCommand.php
-
-		-
-			message: "#^Readonly property Danilovl\\\\TranslatorBundle\\\\Command\\\\MigrationFromDatabaseCommand\\:\\:\\$io is assigned outside of the constructor\\.$#"
-			count: 1
-			path: src/Command/MigrationFromDatabaseCommand.php
-
-		-
-			message: "#^Class Danilovl\\\\TranslatorBundle\\\\Command\\\\MigrationToDatabaseCommand has an uninitialized readonly property \\$io\\. Assign it in the constructor\\.$#"
+			message: '#^Parameter \#4 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects string\|null, array given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Command/MigrationToDatabaseCommand.php
 
 		-
-			message: "#^Readonly property Danilovl\\\\TranslatorBundle\\\\Command\\\\MigrationToDatabaseCommand\\:\\:\\$io is assigned outside of the constructor\\.$#"
-			count: 1
-			path: src/Command/MigrationToDatabaseCommand.php
-
-		-
-			message: "#^Class Danilovl\\\\TranslatorBundle\\\\Command\\\\TransformToFormatCommand has an uninitialized readonly property \\$io\\. Assign it in the constructor\\.$#"
-			count: 1
+			message: '#^Parameter \#4 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects string\|null, array given\.$#'
+			identifier: argument.type
+			count: 2
 			path: src/Command/TransformToFormatCommand.php
 
 		-
-			message: "#^Readonly property Danilovl\\\\TranslatorBundle\\\\Command\\\\TransformToFormatCommand\\:\\:\\$io is assigned outside of the constructor\\.$#"
-			count: 1
-			path: src/Command/TransformToFormatCommand.php
-
-		-
-			message: "#^Offset string on array\\{\\} in isset\\(\\) does not exist\\.$#"
+			message: '#^Offset string on array\{\} in isset\(\) does not exist\.$#'
+			identifier: isset.offset
 			count: 1
 			path: src/Helper/ArrayHelper.php

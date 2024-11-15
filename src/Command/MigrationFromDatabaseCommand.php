@@ -26,7 +26,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'danilovl:translator:migration-from-database')]
 class MigrationFromDatabaseCommand extends Command
 {
-    private readonly SymfonyStyle $io;
+    private SymfonyStyle $io;
 
     private ?LoggerInterface $logger = null;
 

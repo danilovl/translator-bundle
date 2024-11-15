@@ -28,7 +28,7 @@ use Symfony\Component\Finder\Finder;
 #[AsCommand(name: 'danilovl:translator:migration-to-database')]
 class MigrationToDatabaseCommand extends Command
 {
-    private readonly SymfonyStyle $io;
+    private SymfonyStyle $io;
 
     private ?LoggerInterface $logger = null;
 

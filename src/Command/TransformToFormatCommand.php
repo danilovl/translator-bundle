@@ -25,7 +25,7 @@ use Symfony\Component\Yaml\Yaml;
 #[AsCommand(name: 'danilovl:translator:transform-to-format')]
 class TransformToFormatCommand extends Command
 {
-    private readonly SymfonyStyle $io;
+    private SymfonyStyle $io;
 
     public function __construct(
         private readonly TranslatorConfigurationUtil $translatorConfigurationUtil

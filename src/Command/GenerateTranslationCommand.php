@@ -19,7 +19,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'danilovl:translator:generate-translation')]
 class GenerateTranslationCommand extends Command
 {
-    private readonly SymfonyStyle $io;
+    private SymfonyStyle $io;
 
     private ?LoggerInterface $logger = null;
 

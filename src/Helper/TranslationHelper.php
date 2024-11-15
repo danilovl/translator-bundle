@@ -8,21 +8,21 @@ class TranslationHelper
 {
     public static function getDomainFromFilename(string $filename): string
     {
-        $domain = explode('.', $filename)[0] ?? null;
-        if ($domain === null) {
+        $result = explode('.', $filename);
+        if (count($result) !== 3) {
             throw new RuntimeException('Can not determine domain from filename.');
         }
 
-        return $domain;
+        return $result[0];
     }
 
     public static function getLocaleFromFilename(string $filename): string
     {
-        $locale = explode('.', $filename)[1] ?? null;
-        if ($locale === null) {
+        $result = explode('.', $filename);
+        if (count($result) !== 3) {
             throw new RuntimeException('Can not determine locale from filename.');
         }
 
-        return $locale;
+        return $result[1];
     }
 }
