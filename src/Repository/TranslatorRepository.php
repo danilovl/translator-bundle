@@ -21,8 +21,8 @@ class TranslatorRepository extends ServiceEntityRepository
     public function getByDomainLocale(
         string $locale,
         string $domain,
-        int $offset = null,
-        int $limit = null
+        ?int $offset = null,
+        ?int $limit = null
     ): array {
         $queryBuilder = $this->createQueryBuilder('translator')
             ->where('translator.locale = :locale')
@@ -47,8 +47,8 @@ class TranslatorRepository extends ServiceEntityRepository
     public function getKeyValue(
         string $locale,
         string $domain,
-        int $offset = null,
-        int $limit = null
+        ?int $offset = null,
+        ?int $limit = null
     ): array {
         $queryBuilder = $this->createQueryBuilder('translator')
             ->select('translator.key, translator.value')
