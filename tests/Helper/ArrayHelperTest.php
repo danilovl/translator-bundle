@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class ArrayHelperTest extends TestCase
 {
-    #[DataProvider('dataFlattenArray')]
+    #[DataProvider('provideGetSucceedIgnoreCases')]
     public function testGetSucceedIgnore(array $data, array $expected): void
     {
         $result = ArrayHelper::flattenArray($data);
@@ -18,7 +18,7 @@ class ArrayHelperTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    #[DataProvider('dataDotToNested')]
+    #[DataProvider('provideDotToNestedCases')]
     public function testDotToNested(array $data, array $expected): void
     {
         $result = ArrayHelper::dotToNested($data);
@@ -26,7 +26,7 @@ class ArrayHelperTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    #[DataProvider('dataAddEscape')]
+    #[DataProvider('provideAddEscapeCases')]
     public function testAddEscape(array $data, array $expected): void
     {
         ArrayHelper::addEscape($data);
@@ -34,7 +34,7 @@ class ArrayHelperTest extends TestCase
         $this->assertSame($expected, $data);
     }
 
-    #[DataProvider('dataGetDiff')]
+    #[DataProvider('provideGetDiffCases')]
     public function testGetDiff(array $currentArray, array $previousArray, array $expected): void
     {
         $result = ArrayHelper::getDiff($currentArray, $previousArray);
@@ -42,7 +42,7 @@ class ArrayHelperTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    #[DataProvider('dataOrder')]
+    #[DataProvider('provideOrderCases')]
     public function testOrder(array $currentArray, OrderConstant $order, array $expected): void
     {
         $result = ArrayHelper::sort($currentArray, $order);
@@ -50,7 +50,7 @@ class ArrayHelperTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public static function dataFlattenArray(): Generator
+    public static function provideGetSucceedIgnoreCases(): Generator
     {
         yield [
             ['a' => 1, 'b' => ['c' => 2]],
@@ -68,7 +68,7 @@ class ArrayHelperTest extends TestCase
         ];
     }
 
-    public static function dataDotToNested(): Generator
+    public static function provideDotToNestedCases(): Generator
     {
         yield [
             ['a' => 1, 'b.c' => 2],
@@ -86,7 +86,7 @@ class ArrayHelperTest extends TestCase
         ];
     }
 
-    public static function dataAddEscape(): Generator
+    public static function provideAddEscapeCases(): Generator
     {
         yield [
             [
@@ -100,7 +100,7 @@ class ArrayHelperTest extends TestCase
         ];
     }
 
-    public static function dataGetDiff(): Generator
+    public static function provideGetDiffCases(): Generator
     {
         yield [
             ['a' => 1, 'b' => 2, 'c' => 3],
@@ -115,7 +115,7 @@ class ArrayHelperTest extends TestCase
         ];
     }
 
-    public static function dataOrder(): Generator
+    public static function provideOrderCases(): Generator
     {
         yield [
             ['b' => 2, 'c' => 3, 'a' => 1],

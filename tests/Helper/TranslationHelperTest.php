@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class TranslationHelperTest extends TestCase
 {
-    #[DataProvider('validDomainProvider')]
+    #[DataProvider('provideGetDomainFromFilenameValidCases')]
     public function testGetDomainFromFilenameValid(string $filename, string $expectedDomain): void
     {
         $this->assertEquals(
@@ -19,7 +19,7 @@ class TranslationHelperTest extends TestCase
         );
     }
 
-    #[DataProvider('validLocaleProvider')]
+    #[DataProvider('provideGetLocaleFromFilenameValidCases')]
     public function testGetLocaleFromFilenameValid(string $filename, string $expectedLocale): void
     {
         $this->assertEquals(
@@ -46,14 +46,14 @@ class TranslationHelperTest extends TestCase
         TranslationHelper::getLocaleFromFilename($filename);
     }
 
-    public static function validDomainProvider(): Generator
+    public static function provideGetDomainFromFilenameValidCases(): Generator
     {
         yield ['domain.en.json', 'domain'];
         yield ['another_domain.ru.json', 'another_domain'];
         yield ['my_app.de.json', 'my_app'];
     }
 
-    public static function validLocaleProvider(): Generator
+    public static function provideGetLocaleFromFilenameValidCases(): Generator
     {
         yield ['domain.en.json', 'en'];
         yield ['another_domain.fr.json', 'fr'];
