@@ -22,7 +22,7 @@
     "require": {
         "php": "^8.3",
         "doctrine/orm": "^2 || ^3",
-        "doctrine/doctrine-bundle": "^2.11",
+        "doctrine/doctrine-bundle": "^2.15 | ^3.0",
         "easycorp/easyadmin-bundle": "^4.9",
         "symfony/console": "^7.0",
         "symfony/event-dispatcher": "^7.0",
