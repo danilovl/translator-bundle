@@ -65,7 +65,6 @@ Add entity mapping to `doctrine.yaml` in `packages` folder.
 
 ```yaml
 orm:
-  auto_generate_proxy_classes: '%kernel.debug%'
   mappings:
     Danilovl\TranslatorBundle:
       is_bundle: false
