@@ -7,10 +7,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\{
     Dashboard,
     MenuItem
 };
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 
+#[AdminDashboard(routePath: '/danilovl/translator', routeName: 'danilovl_translator_admin_dashboard')]
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(private readonly AdminUrlGenerator $adminUrlGenerator) {}

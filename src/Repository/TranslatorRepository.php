@@ -4,7 +4,7 @@ namespace Danilovl\TranslatorBundle\Repository;
 
 use Danilovl\TranslatorBundle\Entity\Translator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\{Order};
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -54,7 +54,7 @@ class TranslatorRepository extends ServiceEntityRepository
             ->select('translator.key, translator.value')
             ->where('translator.domain = :domain')
             ->andWhere('translator.locale = :locale')
-            ->orderBy('translator.key', Criteria::ASC)
+            ->orderBy('translator.key', Order::Ascending->value)
             ->setParameter('locale', $locale)
             ->setParameter('domain', $domain);
 

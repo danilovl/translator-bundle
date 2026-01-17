@@ -55,6 +55,7 @@ Create `danilovl_translator.yaml` in you `packages` folder.
 danilovl_translator:
   enabled: true
   enabledAutoAdminRefreshCache: true
+  enabledDashboardController: true
   locale: [en, ru]
   domain: [messages,validators]
 ```
@@ -83,21 +84,10 @@ php bin/console doctrine:schema:update --dump-sql
 
 #### 2.2 Easy admin
 
-Add route to you project routes `routes.yaml`.
+If you want to use the built-in `DashboardController`, you should enable it in the configuration `enabledDashboardController: true`.
+Then the admin interface will be available at the URL `/admin/danilovl/translator`.
 
-```yaml
-_danilovl_translator_admin_dashboard:
-  resource: "@TranslatorBundle/Resources/config/routing.yaml"
-```
-With prefix if url `/translator` exist in project.
-
-```yaml
-_danilovl_translator_admin_dashboard:
-  prefix:   /danilovl
-  resource: "@TranslatorBundle/Resources/config/routing.yaml"
-```
-
-The admin interface will be available at the URL `/translator/admin`.
+If you want to use your own `DashboardController` or custom routing, you can add the route to your project routes `routes.yaml`.
 
 ### 3. Usage command
 
@@ -128,8 +118,7 @@ By default `mode` is `migrate`, `dump` show you sql query.
 ```shell
 php bin/console danilovl:translator:migration-to-database full
 
-php bin/console danilovl:translator:migration-to-database full migrate
-php bin/console danilovl:translator:migration-to-database full migrate --locale=en
+php bin/console danilovl:translator:migration-to-database full 
 php bin/console danilovl:translator:migration-to-database full --locale=en
 php bin/console danilovl:translator:migration-to-database full --locale=en --domain=messages
 php bin/console danilovl:translator:migration-to-database full --domain=messages
@@ -154,7 +143,7 @@ php bin/console danilovl:translator:migration-to-database only-new --mode=dump -
 php bin/console danilovl:translator:migration-to-database only-new --mode=dump --locale=en -domain=messages
 ```
 
-Generate `update`,`delete`,`insert` sql query by git diff. Compare the current file with the last version.
+Generate `update`, `delete`, `insert` sql query by git diff. Compare the current file with the last version.
 
 ```shell
 php bin/console danilovl:translator:migration-to-database git-diff
@@ -166,7 +155,7 @@ php bin/console danilovl:translator:migration-to-database git-diff --mode=dump
 php bin/console danilovl:translator:migration-to-database git-diff --locale=en
 ```
 
-Generate `update`, `delete`, `insert` sql queries by comparing the current file with the database.
+Generate `update`,`delete`,`insert` sql queries by comparing the current file with the database.
 
 ```shell
 php bin/console danilovl:translator:migration-to-database database-diff

@@ -2,6 +2,7 @@
 
 namespace Danilovl\TranslatorBundle\DependencyInjection;
 
+use Danilovl\TranslatorBundle\Admin\DashboardController;
 use Danilovl\TranslatorBundle\Util\TranslatorConfigurationUtil;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -27,9 +28,14 @@ class TranslatorExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . self::DIR_CONFIG));
         $loader->load('services.yaml');
 
+        if (!$config['enabledDashboardController']) {
+            $container->removeDefinition(DashboardController::class);
+        }
+
         $translatorConfiguration = $container->getDefinition(TranslatorConfigurationUtil::class);
         $translatorConfiguration->addMethodCall('setIsEnabled', [$config['enabled']]);
         $translatorConfiguration->addMethodCall('setIsAutoAdminRefreshCache', [$config['enabledAutoAdminRefreshCache']]);
+        $translatorConfiguration->addMethodCall('setIsEnabledDashboardController', [$config['enabledDashboardController']]);
         $translatorConfiguration->addMethodCall('setLocales', [$config['locale']]);
         $translatorConfiguration->addMethodCall('setDomains', [$config['domain']]);
         $translatorConfiguration->addMethodCall('setKernelCacheDir', [$kernelCacheDir]);

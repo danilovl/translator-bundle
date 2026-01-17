@@ -4,7 +4,7 @@ namespace Danilovl\TranslatorBundle\Admin;
 
 use Danilovl\TranslatorBundle\Entity\Translator;
 use Danilovl\TranslatorBundle\Util\TranslatorConfigurationUtil;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\{
@@ -13,7 +13,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\{
     FormField,
     ChoiceField,
     IntegerField,
-    DateTimeField};
+    DateTimeField
+};
 
 class TranslatorCrudController extends AbstractCrudController
 {
@@ -30,7 +31,7 @@ class TranslatorCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Translator')
             ->setEntityLabelInPlural('Translators')
             ->setSearchFields(['id', 'locale', 'domain', 'key', 'value'])
-            ->setDefaultSort(['id' => Criteria::DESC]);
+            ->setDefaultSort(['id' => Order::Descending->value]);
     }
 
     public function configureFields(string $pageName): iterable

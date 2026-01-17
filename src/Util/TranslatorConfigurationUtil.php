@@ -8,6 +8,8 @@ class TranslatorConfigurationUtil
 
     private bool $isAutoAdminRefreshCache = false;
 
+    private bool $isEnabledDashboardController = false;
+
     private string $kernelCacheDir;
 
     private string $kernelProjectDir;
@@ -42,6 +44,16 @@ class TranslatorConfigurationUtil
     public function setIsAutoAdminRefreshCache(bool $isAutoAdminRefreshCache): void
     {
         $this->isAutoAdminRefreshCache = $isAutoAdminRefreshCache;
+    }
+
+    public function isEnabledDashboardController(): bool
+    {
+        return $this->isEnabledDashboardController;
+    }
+
+    public function setIsEnabledDashboardController(bool $isEnabledDashboardController): void
+    {
+        $this->isEnabledDashboardController = $isEnabledDashboardController;
     }
 
     public function getKernelCacheDir(): string
