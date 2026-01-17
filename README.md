@@ -20,8 +20,8 @@ Symfony bundle provides a simple way to manage system translations.
 
 ### Requirements
 
-* PHP 8.3 or higher
-* Symfony 7.0 or higher
+* PHP 8.5 or higher
+* Symfony 8.0 or higher
 * MySQL
 * EasyAdmin
 * Only YAML translation file extensions and MySQL database are supported.
