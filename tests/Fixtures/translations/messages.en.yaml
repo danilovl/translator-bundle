@@ -1,0 +1,6 @@
+quote: "It's a test"
+backslash: 'C:\path\'
+injection: "\\'; DROP TABLE translator; -- "
+'a&b': 'A & B'
+nested:
+    key: 'value'

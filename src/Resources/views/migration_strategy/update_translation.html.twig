@@ -1,3 +1,5 @@
-{% for key, value in translations %}
-UPDATE `translator` SET `value` = '{{ value|raw }}' WHERE `locale` = '{{ locale }}' AND `key` = '{{ key }}';
+{% autoescape false %}
+{% for translation in translations %}
+UPDATE `translator` SET `value` = {{ translation.value }} WHERE `locale` = {{ locale }} AND `domain` = {{ domain }} AND `key` = {{ translation.key }};
 {% endfor %}
+{% endautoescape %}

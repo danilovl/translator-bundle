@@ -50,7 +50,6 @@ class DatabaseDiffMigration extends BaseMigration
         /** @var array $currentTranslation */
         $currentTranslation = Yaml::parseFile((string) $file->getRealPath());
         $currentTranslation = ArrayHelper::flattenArray($currentTranslation);
-        ArrayHelper::addEscape($currentTranslation);
 
         $result = ArrayHelper::getDiff($currentTranslation, $previousTranslation);
 

@@ -52,7 +52,6 @@ class GitDiffMigration extends BaseMigration
         /** @var array $currentTranslation */
         $currentTranslation = Yaml::parseFile((string) $file->getRealPath());
         $currentTranslation = ArrayHelper::flattenArray($currentTranslation);
-        ArrayHelper::addEscape($currentTranslation);
 
         $filename = $file->getFilename();
         $domain = TranslationHelper::getDomainFromFilename($filename);

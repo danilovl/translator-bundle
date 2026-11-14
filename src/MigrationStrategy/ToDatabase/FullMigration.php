@@ -42,7 +42,6 @@ class FullMigration extends BaseMigration
         /** @var array $translations */
         $translations = Yaml::parseFile((string) $file->getRealPath());
         $translations = ArrayHelper::flattenArray($translations);
-        ArrayHelper::addEscape($translations);
 
         return $this->generateSql(
             '@Translator/migration_strategy/full_migration.html.twig',

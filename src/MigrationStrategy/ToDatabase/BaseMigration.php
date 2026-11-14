@@ -55,10 +55,8 @@ abstract class BaseMigration
     {
         /** @var array $translations */
         $translations = Yaml::parseFile((string) $file->getRealPath());
-        $translations = ArrayHelper::flattenArray($translations);
-        ArrayHelper::addEscape($translations);
 
-        return $translations;
+        return ArrayHelper::flattenArray($translations);
     }
 
     protected function generateSql(
@@ -67,10 +65,22 @@ abstract class BaseMigration
         string $locale,
         string $domain
     ): string {
+        $connection = $this->entityManager->getConnection();
+
+        $quotedTranslations = [];
+        foreach ($translations as $key => $value) {
+            $stringValue = is_scalar($value) ? (string) $value : '';
+
+            $quotedTranslations[] = [
+                'key' => $connection->quote((string) $key),
+                'value' => $connection->quote($stringValue)
+            ];
+        }
+
         return $this->twig->render($template, [
-            'locale' => $locale,
-            'domain' => $domain,
-            'translations' => $translations
+            'locale' => $connection->quote($locale),
+            'domain' => $connection->quote($domain),
+            'translations' => $quotedTranslations
         ]);
     }
 

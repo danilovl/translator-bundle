@@ -14,22 +14,21 @@ use Danilovl\TranslatorBundle\MigrationStrategy\MigrationToDatabaseResolver;
 use Danilovl\TranslatorBundle\Util\TranslatorConfigurationUtil;
 use Exception;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\{
-    InputOption,
-    InputArgument,
-    InputInterface
+use Symfony\Component\Console\Attribute\{
+    Option,
+    Argument,
+    AsCommand
 };
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 
-#[AsCommand(name: 'danilovl:translator:migration-to-database')]
-class MigrationToDatabaseCommand extends Command
+#[AsCommand(
+    name: 'danilovl:translator:migration-to-database',
+    description: 'Migration translations to database.'
+)]
+class MigrationToDatabaseCommand
 {
-    private SymfonyStyle $io;
-
     private ?LoggerInterface $logger = null;
 
     public function __construct(
@@ -37,108 +36,73 @@ class MigrationToDatabaseCommand extends Command
         private readonly MigrationToDatabaseResolver $migrationResolver,
         private readonly LocaleValidator $localeValidator,
         private readonly DomainValidator $domainValidator
-    ) {
-        parent::__construct();
-    }
+    ) {}
 
     public function setLogger(?LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
 
-    protected function configure(): void
-    {
-        $this->setDescription('Migration translations to database.')
-            ->addArgument(
-                'strategy',
-                InputArgument::REQUIRED,
-                'Migration strategy.',
-                suggestedValues: MigrationToDatabaseStrategyConstant::values()
-            )
-            ->addOption(
-                'mode',
-                'm',
-                InputOption::VALUE_OPTIONAL,
-                'Migration mode.',
-                default: MigrationModeConstant::MIGRATE->value,
-                suggestedValues: MigrationModeConstant::values()
-            )
-            ->addOption(
-                'locale',
-                null,
-                InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
-                'Generate translation for specific locales.',
-                suggestedValues: $this->translatorConfigurationUtil->getLocales()
-            )
-            ->addOption(
-                'domain',
-                null,
-                InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
-                'Generate translation for specific domain.',
-                suggestedValues: $this->translatorConfigurationUtil->getDomains()
-            );
-    }
-
-    protected function initialize(InputInterface $input, OutputInterface $output): void
-    {
-        $this->io = new SymfonyStyle($input, $output);
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        /** @var string $strategy */
-        $strategy = $input->getArgument('strategy');
-        /** @var string $mode */
-        $mode = $input->getOption('mode');
-
-        /** @var array|null $localeOptions */
-        $localeOptions = $input->getOption('locale');
-        /** @var array|null $domainOptions */
-        $domainOptions = $input->getOption('domain');
-
-        $locales = $this->translatorConfigurationUtil->getLocales();
-        $domains = $this->translatorConfigurationUtil->getDomains();
-
-        if (!empty($localeOptions)) {
-            $locales = $localeOptions;
-        }
-
-        if (!empty($domainOptions)) {
-            $domains = $domainOptions;
-        }
+    /**
+     * @param string[] $locale
+     * @param string[] $domain
+     */
+    public function __invoke(
+        SymfonyStyle $io,
+        #[Argument(description: 'Migration strategy.')]
+        MigrationToDatabaseStrategyConstant $strategy,
+        #[Option(description: 'Migration mode.', shortcut: 'm')]
+        MigrationModeConstant $mode = MigrationModeConstant::MIGRATE,
+        #[Option(description: 'Generate translation for specific locales.', suggestedValues: [self::class, 'getLocales'])]
+        array $locale = [],
+        #[Option(description: 'Generate translation for specific domain.', suggestedValues: [self::class, 'getDomains'])]
+        array $domain = []
+    ): int {
+        $locales = !empty($locale) ? $locale : $this->translatorConfigurationUtil->getLocales();
+        $domains = !empty($domain) ? $domain : $this->translatorConfigurationUtil->getDomains();
 
         $this->localeValidator->validate($locales);
         $this->domainValidator->validate($domains);
 
-        $finder = (new Finder)
+        $finder = new Finder()
             ->files()
             ->in($this->translatorConfigurationUtil->getTranslatorDefaultPath());
 
-        foreach ($locales as $locale) {
-            foreach ($domains as $domain) {
-                $name = sprintf('%s.%s.yaml', $domain, $locale);
-                $finder->name($name);
+        foreach ($locales as $localeItem) {
+            foreach ($domains as $domainItem) {
+                $finder->name(sprintf('%s.%s.yaml', $domainItem, $localeItem));
             }
         }
 
         try {
-            $this->migrationResolver->execute(
-                MigrationToDatabaseStrategyConstant::from($strategy),
-                MigrationModeConstant::from($mode),
-                $finder,
-                $this->io,
-            );
+            $this->migrationResolver->execute($strategy, $mode, $finder, $io);
         } catch (Exception $exception) {
-            $message = sprintf('[GenerateTranslationCommand] %s', $exception->getMessage());
+            $message = sprintf('[MigrationToDatabaseCommand] %s', $exception->getMessage());
             $this->logger?->error($message);
 
-            $this->io->error($exception->getMessage());
+            $io->error($exception->getMessage());
 
             return Command::FAILURE;
         }
 
-        $this->io->success('Done');
+        $io->success('Done');
 
         return Command::SUCCESS;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getLocales(): array
+    {
+        return $this->translatorConfigurationUtil->getLocales();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDomains(): array
+    {
+        return $this->translatorConfigurationUtil->getDomains();
     }
 }

@@ -1,3 +1,5 @@
-{% for key, value in translations %}
-DELETE FROM `translator` WHERE `locale` = '{{ locale }}' AND `key` = '{{ key }}';
+{% autoescape false %}
+{% for translation in translations %}
+DELETE FROM `translator` WHERE `locale` = {{ locale }} AND `domain` = {{ domain }} AND `key` = {{ translation.key }};
 {% endfor %}
+{% endautoescape %}

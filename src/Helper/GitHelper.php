@@ -8,7 +8,7 @@ class GitHelper
 {
     public static function getShowLatestFileContent(string $filePath): array
     {
-        $command = sprintf('git show HEAD:%s', $filePath);
+        $command = sprintf('git show %s 2>/dev/null', escapeshellarg('HEAD:' . $filePath));
         exec($command, $previousContent);
 
         /** @var array $previousArray */
